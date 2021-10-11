@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <title>ÜrünTanımlama</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+/* Set a style for all buttons */
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+  opacity: 0.8;
+}
+
+
+
+/* Add padding to containers */
+.container {
+  padding: 16px;
+}
+
+
+
+    </style>
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+<!-- Links -->
+  <ul class="navbar-nav">
+      <!-- Navbar text-->
+    <li class="nav-item">
+      <a class="nav-link" href="/">Anasayfa </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/kategori/ceptelefonu">Cep Telefonu</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/kategori/akillisaatler">Akıllı Saatler</a>
+    </li>
+      <li class="nav-item">
+      <a class="nav-link" href="/kategori/telefonkilifi">Telefon kılıfı</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/kategori/kulaklik">Kulaklık</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/sepet">Sepet</a>
+    </li>
+    {% if kullanici['rol'] == 'yonetici' %}
+    <li class="nav-item">
+      <a class="nav-link active" href="/uruntanimla">Ürün Tanımla</a>
+    </li>
+    {% endif %}
+
+
+  </ul>
+  {% if kullanici %}
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="/cikis"> Merhaba {{kullanici['ad']}} - Çıkış yap</a>
+    </li>
+  </ul>
+  {% else %}
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="/giris"> Kullanıcı Girişi</a>
+    </li>
+  </ul>
+  {% endif %}
+</nav>
+
+<div align="center"> <img src="/static/canologo.jpg" alt="logo" style="width:500px;"> </div>
+<div class="container">
+  <form action="/uruntanimla" method="post" enctype="multipart/form-data">
+
+
+    <h1>Ürün Tanımlama</h1>
+
+
+  <div class="form-row">
+    <div class="col form-group">
+    <label for="_id"><b>Ürün Kodu</b></label>
+    <input type="text" class="form-control" placeholder="Ürün Kodu" id="_id" name="_id" required>
+    </div>
+    <div class="col form-group">
+    <label for="ad"><b>Ad</b></label>
+    <input type="text" class="form-control" placeholder="Ad" id="ad" name="ad" required>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col form-group">
+    <label for="aciklama"><b>Açıklama</b></label>
+    <input type="text" class="form-control" placeholder="Açıklama" id="aciklama" name="aciklama" required>
+    </div>
+    <div class="col form-group">
+    <label for="fiyat"><b>Fiyat</b></label>
+    <input type="text" class="form-control" placeholder="Fiyat" id="fiyat" name="fiyat" required>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col form-group">
+    <label for="stok"><b>Stok</b></label>
+    <input type="text" class="form-control" placeholder="Stok" id="stok" name="stok" required>
+    </div>
+    <div class="col form-group">
+    <label for="stok_birim"><b>Stok Birimi</b></label>
+    <input type="text" class="form-control" placeholder="Stok Birimi" id="stok_birim" name="stok_birim" required>
+    </div>
+
+  </div>
+  <div class="form-row">
+    <div class="col form-group">
+    <label for="kategori"><b>Kategori</b></label>
+    <select class="form-control" id="kategori" name="kategori">
+        <option value="ceptelefonu" selected>Cep Telefonu</option>
+        <option value="akillisaatler">Akıllısaatler</option>
+        <option value="telefonkilifi">Telefon Kılıfı</option>
+        <option value="kulaklik">kulaklık</option>
+    </select>
+    </div>
+    <div class="col form-group">
+    <label for="etiket"><b>Etiket</b></label>
+    <select class="form-control" id="etiket" name="etiket">
+        <option value="onerilen" selected>Önerilenler</option>
+        <option value="indirim">İndirimdekiler</option>
+    </select>
+    </div>
+
+  </div>
+  <div class="form-row">
+  </div>
+
+    <div class="form-group">
+      <label for="fotograf"><b>Fotoğraf</b></label>
+      <input type="file" id="fotograf" name="fotograf" class="form-control-file border">
+    </div>
+    <button type="submit">Ürünü Kaydet</button>
+
+
+  </form>
+</div>
+</body>
+</html>
